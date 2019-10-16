@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/feature1"
+    app:startDestination="@id/feature1Fragment">
+
+    <fragment
+        android:id="@+id/feature1Fragment"
+        android:name="com.redmadrobot.sample.feature1.Feature1Fragment"
+        android:label="fragment_feature1"
+        tools:layout="@layout/fragment_feature1" >
+        <action
+            android:id="@+id/toFeature4"
+            app:destination="@id/feature4Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/feature4Fragment"
+        android:name="com.redmadrobot.sample.feature4.Feature4Fragment"
+        android:label="fragment_feature4"
+        tools:layout="@layout/fragment_feature4" />
+</navigation>

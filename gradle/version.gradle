@@ -1,0 +1,26 @@
+def getVersionCodeFromProperties() {
+    Properties versionProperties = loadVersionProperties()
+
+    def (major, minor, patch) = versionProperties["lib_version"].tokenize('.')
+
+    (major, minor, patch) = [major, minor, patch].collect { it.toInteger() }
+
+    return (major * 1000000) + (minor * 10000) + (patch * 100)
+}
+
+def getVersionNameFromProperties() {
+    Properties versionProperties = loadVersionProperties()
+    return versionProperties["lib_version"]
+}
+
+private Properties loadVersionProperties() {
+    Properties versionProperties = new Properties()
+    //noinspection GroovyAssignabilityCheck
+    versionProperties.load(project.rootProject.file('gradle/publish.properties').newDataInputStream())
+    versionProperties
+}
+
+ext {
+    getVersionCodeFromProperties = this.&getVersionCodeFromProperties
+    getVersionNameFromProperties = this.&getVersionNameFromProperties
+}

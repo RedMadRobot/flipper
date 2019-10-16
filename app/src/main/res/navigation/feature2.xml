@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/feature2"
+    app:startDestination="@id/feature2Fragment">
+
+    <fragment
+        android:id="@+id/feature2Fragment"
+        android:name="com.redmadrobot.sample.feature2.Feature2Fragment"
+        android:label="fragment_feature2"
+        tools:layout="@layout/fragment_feature2" />
+</navigation>
