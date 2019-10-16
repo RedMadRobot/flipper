@@ -8,7 +8,7 @@ Flipper is a simple and useful tool to deal with feature toggles. It's not some 
 
 Add this library to your gradle config
 ```groovy
-implementation 'com.redmadrobot:flipper:1.0.4'
+implementation 'com.redmadrobot:flipper:1.0.5'
 ```
 
 Create a class with a description of features
