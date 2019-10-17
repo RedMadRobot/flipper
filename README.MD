@@ -65,7 +65,7 @@ When it comes to Android application, you have only three ways of transition bet
 - tap on the menu item
 - an external event driven by business logic
 
-In fact, all components of triggering transition action are the edges of the features. So, to prevent transition between features, we need to disable the border component. You can do it using extension functions on `View` and `MenuItem` or top-level function to flipping code blocks.
+In fact, all components that trigger transitions are the edges of the features. So, to prevent transition between features, we've got to disable the border component. You can do it using extension functions on View and MenuItem or a top-level function with flipping code blocks.
 
 Some examples
 ```kotlin
