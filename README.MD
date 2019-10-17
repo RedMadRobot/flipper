@@ -53,7 +53,7 @@ feature1Button.setOnClickListener { openFeature1Screen() }
 Run and enjoy!
 
 ### Library components
-input-mask-android/blob/master/
+
 - [`Feature`](https://github.com/RedMadRobot/flipper/blob/master/flipper/src/main/kotlin/com/redmadrobot/flipper/Feature.kt): base class for all your feature objects. You have to provide a unique identifier for each such object.
 - [`ToggleRouter`](https://github.com/RedMadRobot/flipper/blob/master/flipper/src/main/kotlin/com/redmadrobot/flipper/ToggleRouter.kt): features orchestrator based on some variant of the configuration   
 - [`FlipperConfig`](https://github.com/RedMadRobot/flipper/blob/master/flipper/src/main/kotlin/com/redmadrobot/flipper/config/FlipperConfig.kt): base class for your variant of the feature toggle configuration
