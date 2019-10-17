@@ -88,6 +88,14 @@ flipperPoint(Features.Feature1) {
     Log.d("Flipper", "I'll appear only when feature1 is enabled.")
 }
 ```
+
+```kotlin
+if(flipperPointIsEnabled(Features.Feature1)) {
+    Log.d("Flipper", "Feature1 is enabled.")
+} else {
+    Log.d("Flipper", "Feature1 is disabled.")
+}
+```
         
 ### Further reading
 There is an almost "classic" article about feature toggles [Feature Toggles (aka Feature Flags)](https://www.martinfowler.com/articles/feature-toggles.html). You can read it to know more about this library underline concepts.
