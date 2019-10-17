@@ -2,7 +2,7 @@
 
 # Flipper
 
-Flipper is a simple and useful tool to deal with feature toggles. It's not some *secret weapon* rather set of best practices to work with flipping features in your application, which is shipped as a library.
+Flipper is a simple and useful tool to deal with feature toggles. It's not some *secret weapon* but rather a set of best practices to work with flipping features in your application, which is shipped as a library.
 
 ### Quick start
 
@@ -21,7 +21,7 @@ object Features {
 }
 ``` 
 
-Create the simplest variant of the configuration
+Create some simplest configuration describing which features are enabled and which features are disabled:
 ```kotlin
 class HardcodedConfig : FlipperConfig {
     private val features = mapOf(
@@ -39,7 +39,7 @@ Init the library in your **Application** class
 ToggleRouter.init(HardcodedConfig(this))
 ```
 
-Choose the necessary "feature edge" and place toggle point (flipper point in this library terms).
+Choose the necessary "feature edge" and place a toggle point (flipper point in this library terms).
 ```kotlin
 val feature1Button = (Button) findViewById(R.id.feature1_button)
 
@@ -59,8 +59,8 @@ input-mask-android/blob/master/
 - [`FlipperConfig`](https://github.com/RedMadRobot/flipper/blob/master/flipper/src/main/kotlin/com/redmadrobot/flipper/config/FlipperConfig.kt): base class for your variant of the feature toggle configuration
 - [`flipperPoint`](https://github.com/RedMadRobot/flipper/blob/master/flipper/src/main/kotlin/com/redmadrobot/flipper/FlipperExt.kt): Kotlin extension function which you should place at the edge of your feature
 
-### More information about "feature edges"
-In the "Android world", you have only three ways of transition between features. 
+### More information about the "feature edges"
+When it comes to Android application, you have only three ways of transition between features. 
 - tap on the view (swipe like a special case)
 - tap on the menu item
 - an external event driven by business logic
@@ -93,7 +93,7 @@ flipperPoint(Features.Feature1) {
 There is an almost "classic" article about feature toggles [Feature Toggles (aka Feature Flags)](https://www.martinfowler.com/articles/feature-toggles.html). You can read it to know more about this library underline concepts.
 
 ## Feedback
-In case you have faced any bug or have a useful suggestion for improvement of this library, feel free to create [issue](https://github.com/RedMadRobot/flipper/issues). 
+In case you have faced any bug or have a useful suggestion for improvement of this library, feel free to create an [issue](https://github.com/RedMadRobot/flipper/issues). 
 
 ## LICENSE
 
