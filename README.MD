@@ -1,6 +1,7 @@
 <img src="images/logo.png"/>
 
 # Flipper
+[![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23384-green)](https://androidweekly.net/issues/issue-384) [![Bintray](https://img.shields.io/bintray/v/redmadrobot-opensource/android/flipper)](https://bintray.com/redmadrobot-opensource/android/flipper/_latestVersion)
 
 Flipper is a simple and useful tool to deal with feature toggles. It's not some *secret weapon* but rather a set of best practices to work with flipping features in your application, which is shipped as a library.
 
