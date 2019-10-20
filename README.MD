@@ -33,6 +33,7 @@ class HardcodedConfig : FlipperConfig {
     }
 }
 ``` 
+> If you want to manage your features with Firebase, look at [this](https://github.com/RedMadRobot/flipper/blob/master/app/src/main/java/com/redmadrobot/sample/configs/RemoteConfig.kt) config example.   
 
 Init the library in your **Application** class
 ```kotlin
