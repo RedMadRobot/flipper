@@ -38,7 +38,7 @@ class HardcodedConfig : FlipperConfig {
 
 Init the library in your **Application** class
 ```kotlin
-ToggleRouter.init(HardcodedConfig(this))
+ToggleRouter.init(HardcodedConfig())
 ```
 
 Choose the necessary "feature edge" and place a toggle point (flipper point in this library terms).
