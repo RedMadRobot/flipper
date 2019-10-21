@@ -1,13 +1,6 @@
 static def addRepos(RepositoryHandler handler) {
     handler.google()
     handler.jcenter()
-    handler.maven {
-        credentials {
-            username 'android-consumer'
-            password 'FBSLLD4qzMRrdvpQ'
-        }
-        url 'https://nexus.redmadrobot.com/repository/android/'
-    }
 }
 
 ext.addRepos = this.&addRepos
