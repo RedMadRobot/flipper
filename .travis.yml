@@ -1,5 +1,6 @@
 language: android
 jdk: oraclejdk8
+
 android:
   components:
     - tools
@@ -8,6 +9,10 @@ android:
     - android-29
   licenses:
     - android-sdk-license-.+
+
 script:
   - ./gradlew :flipper:test
   - ./gradlew :flipper:build
+
+before_install:
+  - yes | sdkmanager "platforms;android-28"
