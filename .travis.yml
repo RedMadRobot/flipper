@@ -1,10 +1,13 @@
 language: android
-dist: trusty
+jdk: oraclejdk8
 android:
   components:
     - tools
     - platform-tools
     - build-tools-29.0.2
     - android-29
-licenses:
-  - android-sdk-license-.+
+  licenses:
+    - android-sdk-license-.+
+script:
+  - ./gradlew :flipper:test
+  - ./gradlew :flipper:build
