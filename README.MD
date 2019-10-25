@@ -3,7 +3,8 @@
 # Flipper
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23384-green)](https://androidweekly.net/issues/issue-384)
 [![API](https://img.shields.io/badge/API-16%2B-red.svg?style=flat)]((https://android-arsenal.com/api?level=16))
-[![Build Status](https://travis-ci.org/RedMadRobot/flipper.svg?branch=master)](https://travis-ci.org/RedMadRobot/flipper)[![Bintray](https://img.shields.io/bintray/v/redmadrobot-opensource/android/flipper)](https://bintray.com/redmadrobot-opensource/android/flipper/_latestVersion)
+[![Build Status](https://travis-ci.org/RedMadRobot/flipper.svg?branch=master)](https://travis-ci.org/RedMadRobot/flipper)
+[![Bintray](https://img.shields.io/bintray/v/redmadrobot-opensource/android/flipper)](https://bintray.com/redmadrobot-opensource/android/flipper/_latestVersion)
 
 Flipper is a simple and useful tool to deal with feature toggles. It's not some *secret weapon* but rather a set of best practices to work with flipping features in your application, which is shipped as a library.
 
