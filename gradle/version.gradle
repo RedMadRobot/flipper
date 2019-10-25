@@ -15,8 +15,17 @@ def getVersionNameFromProperties() {
 
 private Properties loadVersionProperties() {
     Properties versionProperties = new Properties()
-    //noinspection GroovyAssignabilityCheck
-    versionProperties.load(project.rootProject.file('gradle/publish.properties').newDataInputStream())
+    File propertiesFile = project.rootProject.file('gradle/publish.properties')
+
+
+    if (propertiesFile.exists()) {
+        //noinspection GroovyAssignabilityCheck
+        versionProperties.load(propertiesFile.newDataInputStream())
+    } else {
+        // Stub for CI
+        versionProperties["lib_version"] = "0.0.1"
+    }
+
     versionProperties
 }
 
