@@ -8,6 +8,7 @@ import com.redmadrobot.flipper.support.TestConfig
 import com.redmadrobot.flipper.support.TestFeature
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
@@ -211,7 +212,7 @@ class ToggleRouterTest {
     }
 
     @Test
-    fun `when feature is enabled - then return B-value`() {
+    fun `when feature is disabled - then return B-value`() {
         // Given
         val precalculatedValueA = "valueA"
         val precalculatedValueB = "valueB"
@@ -239,5 +240,39 @@ class ToggleRouterTest {
         val result = ToggleRouter.featureIsEnabled(TestFeature)
 
         assertThat(result).isTrue()
+    }
+
+    @Test
+    fun `when use returnAb - and one of values is nullable - should return nullable result`() {
+        // Given
+        val precalculatedValueA = "valueA"
+        val precalculatedValueB = null
+
+        // When
+        val result = ToggleRouter.returnAb(TestFeature, precalculatedValueA, precalculatedValueB)
+
+        assertNullable(result)
+    }
+
+    @Test
+    fun `when use returnAb - and both values are non-nullable - should return non-nullable result`() {
+        // Given
+        val precalculatedValueA = "valueA"
+        val precalculatedValueB = "valueB"
+
+        // When
+        val result = ToggleRouter.returnAb(TestFeature, precalculatedValueA, precalculatedValueB)
+
+        assertNotNullable(result)
+    }
+
+    @Suppress("UNUSED_PARAMETER") // Parameter needed for type inference
+    private inline fun <reified T> assertNullable(t: T) {
+        assertTrue(null is T)
+    }
+
+    @Suppress("UNUSED_PARAMETER") // Parameter needed for type inference
+    private inline fun <reified T> assertNotNullable(t: T) {
+        assertTrue(null !is T)
     }
 }

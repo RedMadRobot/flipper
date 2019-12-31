@@ -3,8 +3,6 @@ package com.redmadrobot.flipper
 import android.view.MenuItem
 import android.view.View
 import com.redmadrobot.flipper.config.FlipperConfig
-import org.jetbrains.annotations.NotNull
-import org.jetbrains.annotations.Nullable
 
 
 object ToggleRouter {
@@ -34,13 +32,11 @@ object ToggleRouter {
         }
     }
 
-    @Nullable
-    internal fun <T>  returnAb(feature: Feature, valueA: T?, valueB: T?): T? {
+    internal fun <T> returnAb(feature: Feature, valueA: T, valueB: T): T {
         return if (configuration.featureIsEnabled(feature)) valueA else valueB
     }
 
-    @NotNull
-    internal fun featureIsEnabled(feature: Feature) = configuration.featureIsEnabled(feature)
+    internal fun featureIsEnabled(feature: Feature): Boolean = configuration.featureIsEnabled(feature)
 
     private fun flipView(feature: Feature, view: View) {
         view.visibility = if (configuration.featureIsEnabled(feature)) View.VISIBLE else View.GONE
