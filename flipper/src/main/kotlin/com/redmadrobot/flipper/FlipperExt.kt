@@ -15,6 +15,10 @@ fun <T> flipperPointAb(feature: Feature, valueA: T, valueB: T): T {
     return ToggleRouter.returnAb(feature, valueA, valueB)
 }
 
+fun flipperPointValue(feature: Feature) = ToggleRouter.returnFeatureValue(feature)
+
+fun flipperPointStringValue(feature: Feature) = ToggleRouter.returnStringFeatureValue(feature)
+
 fun View.flipperPoint(feature: Feature) {
     ToggleRouter.flip(feature, this)
 }

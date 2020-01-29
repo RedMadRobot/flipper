@@ -5,11 +5,13 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.redmadrobot.flipper.Feature
 import com.redmadrobot.flipper.config.FlipperConfig
+import com.redmadrobot.flipper.config.value.FeatureValue
+import com.redmadrobot.flipper.config.value.FeatureValueImpl
 import com.redmadrobot.sample.BuildConfig
 import com.redmadrobot.sample.R
 
 
-class RemoteConfig(context: Context) : FlipperConfig {
+class RemoteConfig(context: Context) : FlipperConfig() {
     private val remoteConfig by lazy { FirebaseRemoteConfig.getInstance() }
 
     private val configSettings by lazy {
@@ -28,7 +30,8 @@ class RemoteConfig(context: Context) : FlipperConfig {
         }
     }
 
-    override fun featureIsEnabled(feature: Feature): Boolean {
-        return remoteConfig.getBoolean(feature.id)
+    override fun getFeatureValue(feature: Feature): FeatureValue {
+        val value = remoteConfig.getValue(feature.id)
+        return FeatureValueImpl(value.asString())
     }
 }

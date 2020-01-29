@@ -4,8 +4,9 @@ import android.view.MenuItem
 import android.view.View
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
+import com.redmadrobot.flipper.support.TestBooleanFeature
 import com.redmadrobot.flipper.support.TestConfig
-import com.redmadrobot.flipper.support.TestFeature
+import com.redmadrobot.flipper.support.TestStringFeature
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -28,7 +29,7 @@ class ToggleRouterTest {
         testConfig.enableFeature(true)
 
         // When
-        ToggleRouter.flip(TestFeature, view)
+        ToggleRouter.flip(TestBooleanFeature, view)
 
         // Then
         verify(view).visibility = View.VISIBLE
@@ -41,7 +42,7 @@ class ToggleRouterTest {
         testConfig.enableFeature(false)
 
         // When
-        ToggleRouter.flip(TestFeature, view)
+        ToggleRouter.flip(TestBooleanFeature, view)
 
         // Then
         verify(view).visibility = View.GONE
@@ -55,7 +56,7 @@ class ToggleRouterTest {
 
         // When
         testConfig.enableFeature(true)
-        ToggleRouter.flipAb(TestFeature, viewA, viewB)
+        ToggleRouter.flipAb(TestBooleanFeature, viewA, viewB)
 
         // Then
         verify(viewA).visibility = View.VISIBLE
@@ -70,7 +71,7 @@ class ToggleRouterTest {
 
         // When
         testConfig.enableFeature(false)
-        ToggleRouter.flipAb(TestFeature, viewA, viewB)
+        ToggleRouter.flipAb(TestBooleanFeature, viewA, viewB)
 
         // Then
         verify(viewA).visibility = View.GONE
@@ -84,7 +85,7 @@ class ToggleRouterTest {
         testConfig.enableFeature(true)
 
         // When
-        ToggleRouter.flip(TestFeature, menuItem)
+        ToggleRouter.flip(TestBooleanFeature, menuItem)
 
         // Then
         verify(menuItem).isVisible = true
@@ -97,7 +98,7 @@ class ToggleRouterTest {
         testConfig.enableFeature(false)
 
         // When
-        ToggleRouter.flip(TestFeature, menuItem)
+        ToggleRouter.flip(TestBooleanFeature, menuItem)
 
         // Then
         verify(menuItem).isVisible = false
@@ -111,7 +112,7 @@ class ToggleRouterTest {
 
         // When
         testConfig.enableFeature(true)
-        ToggleRouter.flipAb(TestFeature, menuItemA, menuItemB)
+        ToggleRouter.flipAb(TestBooleanFeature, menuItemA, menuItemB)
 
         // Then
         verify(menuItemA).isVisible = true
@@ -126,7 +127,7 @@ class ToggleRouterTest {
 
         // When
         testConfig.enableFeature(false)
-        ToggleRouter.flipAb(TestFeature, menuItemA, menuItemB)
+        ToggleRouter.flipAb(TestBooleanFeature, menuItemA, menuItemB)
 
         // Then
         verify(menuItemA).isVisible = false
@@ -140,7 +141,7 @@ class ToggleRouterTest {
         testConfig.enableFeature(true)
 
         // When
-        ToggleRouter.flip(TestFeature, block)
+        ToggleRouter.flip(TestBooleanFeature, block)
 
         // Then
         verify(block).invoke()
@@ -154,7 +155,7 @@ class ToggleRouterTest {
         testConfig.enableFeature(false)
 
         // When
-        ToggleRouter.flip(TestFeature, block)
+        ToggleRouter.flip(TestBooleanFeature, block)
 
         // Then
         assertThat(workaround).isFalse()
@@ -172,7 +173,7 @@ class ToggleRouterTest {
         testConfig.enableFeature(true)
 
         // When
-        ToggleRouter.flipAb(TestFeature, blockA, blockB)
+        ToggleRouter.flipAb(TestBooleanFeature, blockA, blockB)
 
         // Then
         assertThat(workaroundA).isTrue()
@@ -191,7 +192,7 @@ class ToggleRouterTest {
         testConfig.enableFeature(false)
 
         // When
-        ToggleRouter.flipAb(TestFeature, blockA, blockB)
+        ToggleRouter.flipAb(TestBooleanFeature, blockA, blockB)
 
         // Then
         assertThat(workaroundA).isFalse()
@@ -206,7 +207,7 @@ class ToggleRouterTest {
 
         // When
         testConfig.enableFeature(true)
-        val result = ToggleRouter.returnAb(TestFeature, precalculatedValueA, precalculatedValueB)
+        val result = ToggleRouter.returnAb(TestBooleanFeature, precalculatedValueA, precalculatedValueB)
 
         assertEquals(precalculatedValueA, result)
     }
@@ -219,7 +220,7 @@ class ToggleRouterTest {
 
         // When
         testConfig.enableFeature(false)
-        val result = ToggleRouter.returnAb(TestFeature, precalculatedValueA, precalculatedValueB)
+        val result = ToggleRouter.returnAb(TestBooleanFeature, precalculatedValueA, precalculatedValueB)
 
         assertEquals(precalculatedValueB, result)
     }
@@ -228,7 +229,7 @@ class ToggleRouterTest {
     fun `when feature is disabled - then return false`() {
         // When
         testConfig.enableFeature(false)
-        val result = ToggleRouter.featureIsEnabled(TestFeature)
+        val result = ToggleRouter.featureIsEnabled(TestBooleanFeature)
 
         assertThat(result).isFalse()
     }
@@ -237,9 +238,21 @@ class ToggleRouterTest {
     fun `when feature is enabled - then return true`() {
         // When
         testConfig.enableFeature(true)
-        val result = ToggleRouter.featureIsEnabled(TestFeature)
+        val result = ToggleRouter.featureIsEnabled(TestBooleanFeature)
 
         assertThat(result).isTrue()
+    }
+
+    @Test
+    fun `when feature has String value - then return value`() {
+        // Given
+        val featureValue = "Test"
+
+        // When
+        val value = ToggleRouter.returnStringFeatureValue(TestStringFeature)
+
+        // Then
+        assertEquals(value, featureValue)
     }
 
     @Test
@@ -249,7 +262,7 @@ class ToggleRouterTest {
         val precalculatedValueB = null
 
         // When
-        val result = ToggleRouter.returnAb(TestFeature, precalculatedValueA, precalculatedValueB)
+        val result = ToggleRouter.returnAb(TestBooleanFeature, precalculatedValueA, precalculatedValueB)
 
         assertNullable(result)
     }
@@ -261,7 +274,7 @@ class ToggleRouterTest {
         val precalculatedValueB = "valueB"
 
         // When
-        val result = ToggleRouter.returnAb(TestFeature, precalculatedValueA, precalculatedValueB)
+        val result = ToggleRouter.returnAb(TestBooleanFeature, precalculatedValueA, precalculatedValueB)
 
         assertNotNullable(result)
     }

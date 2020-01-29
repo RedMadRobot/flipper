@@ -3,6 +3,7 @@ package com.redmadrobot.flipper
 import android.view.MenuItem
 import android.view.View
 import com.redmadrobot.flipper.config.FlipperConfig
+import com.redmadrobot.flipper.config.value.FeatureValue
 
 
 object ToggleRouter {
@@ -34,6 +35,14 @@ object ToggleRouter {
 
     internal fun <T> returnAb(feature: Feature, valueA: T, valueB: T): T {
         return if (configuration.featureIsEnabled(feature)) valueA else valueB
+    }
+
+    internal fun returnFeatureValue(feature: Feature): FeatureValue {
+        return configuration.getFeatureValue(feature)
+    }
+
+    internal fun returnStringFeatureValue(feature: Feature): String {
+        return configuration.getString(feature)
     }
 
     internal fun featureIsEnabled(feature: Feature): Boolean = configuration.featureIsEnabled(feature)
