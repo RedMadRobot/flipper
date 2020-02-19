@@ -23,7 +23,7 @@ def deps = [:]
 //region Gradle
 def gradle = [:]
 
-versions.android_plugin = "3.5.1"
+versions.android_plugin = "3.5.3"
 
 gradle.android_plugin = "com.android.tools.build:gradle:$versions.android_plugin"
 
