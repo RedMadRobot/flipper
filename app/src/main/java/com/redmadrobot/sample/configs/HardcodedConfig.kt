@@ -16,9 +16,6 @@ class HardcodedConfig : FlipperConfig {
         Features.Feature4 to false
     }
 
-    private val a = buildFeaturesMap {
-    }
-
     override fun getValue(feature: Feature): FlipperValue {
         return features[feature.id] ?: EmptyValue
     }

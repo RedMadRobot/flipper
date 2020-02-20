@@ -9,7 +9,7 @@ import com.redmadrobot.flipper.config.FlipperValue.BooleanValue
 
 class TestConfig : FlipperConfig {
     private val features = buildFeaturesMap {
-        appendBoolean(TestFeature.id to true)
+        TestFeature to true
     }
 
     override fun getValue(feature: Feature): FlipperValue {
