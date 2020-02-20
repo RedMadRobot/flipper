@@ -9,7 +9,7 @@
         android:id="@+id/feature1Fragment"
         android:name="com.redmadrobot.sample.feature1.Feature1Fragment"
         android:label="fragment_feature1"
-        tools:layout="@layout/fragment_feature1" >
+        tools:layout="@layout/fragment_feature1">
         <action
             android:id="@+id/toFeature4"
             app:destination="@id/feature4Fragment" />

@@ -3,9 +3,7 @@ package com.redmadrobot.sample.configs
 import com.redmadrobot.flipper.Feature
 import com.redmadrobot.flipper.buildFeaturesMap
 import com.redmadrobot.flipper.config.FlipperConfig
-import com.redmadrobot.flipper.config.FlipperConfigBuilder
 import com.redmadrobot.flipper.config.FlipperValue
-import com.redmadrobot.flipper.config.FlipperValue.BooleanValue
 import com.redmadrobot.flipper.config.FlipperValue.EmptyValue
 import com.redmadrobot.sample.Features
 

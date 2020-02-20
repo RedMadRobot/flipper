@@ -2,7 +2,7 @@ package com.redmadrobot.flipper.config
 
 
 sealed class FlipperValue {
-    object EmptyValue: FlipperValue()
+    object EmptyValue : FlipperValue()
 
     data class BooleanValue(val value: Boolean) : FlipperValue()
     data class StringValue(val value: String) : FlipperValue()
