@@ -452,7 +452,7 @@ class ToggleRouterTest {
     }
 
     @Test
-    fun `when use returnAb with boolean as feature value - and both values are non-nullable - should return non-nullable result`() {
+    fun `when use returnAb with boolean as a feature value - and both values are non-nullable - should return non-nullable result`() {
         // Given
         val precalculatedValueA = "valueA"
         val precalculatedValueB = "valueB"
@@ -464,7 +464,19 @@ class ToggleRouterTest {
     }
 
     @Test
-    fun `when use returnAb with not boolean as feature value - and both values are non-nullable - should return non-nullable result`() {
+    fun `when use returnAb with boolean as a feature value - and both values are lazy - should return non-nullable result`() {
+        // Given
+        val lazycalculatedValueA = { "valueA" }
+        val lazycalculatedValueB = { "valueB" }
+
+        // When
+        val result = ToggleRouter.returnAb(TestFeature, lazycalculatedValueA, lazycalculatedValueB)
+
+        assertNotNullable(result)
+    }
+
+    @Test
+    fun `when use returnAb with not boolean as a feature value - and both values are non-nullable - should return non-nullable result`() {
         // Given
         val precalculatedValueA = "valueA"
         val precalculatedValueB = "valueB"
@@ -482,7 +494,7 @@ class ToggleRouterTest {
     }
 
     @Test
-    fun `when use returnAb with not boolean as feature value - and one of values is nullable - should return nullable result`() {
+    fun `when use returnAb with not boolean as a feature value - and one of values is nullable - should return nullable result`() {
         // Given
         val precalculatedValueA = "valueA"
         val precalculatedValueB = null
@@ -500,7 +512,25 @@ class ToggleRouterTest {
     }
 
     @Test
-    fun `when feature can have several state - should return value by mapping`() {
+    fun `when use returnAb with not boolean as a feature value - and both values are lazy - should return non-nullable result`() {
+        // Given
+        val lazycalculatedValueA = { "valueA" }
+        val lazycalculatedValueB = { "valueB" }
+
+        // When
+        testConfig.setValue(StringValue("foo"))
+        val result = ToggleRouter.returnAb(
+            TestFeature,
+            lazycalculatedValueA,
+            lazycalculatedValueB,
+            { x -> (x as StringValue).value == "bzz" }
+        )
+
+        assertNotNullable(result)
+    }
+
+    @Test
+    fun `when feature can have several states - should return value by mapping`() {
         // Given
         val mapping = mapOf<FlipperValue, String>(
             StringValue("foo") to "bar",
