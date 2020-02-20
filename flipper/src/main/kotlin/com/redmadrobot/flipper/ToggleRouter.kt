@@ -62,8 +62,18 @@ object ToggleRouter {
     }
 
     @PublishedApi
+    internal fun <T> returnAb(feature: Feature, valueA: () -> T, valueB: () -> T): T {
+        return if (extractBooleanValue(feature)) valueA() else valueB()
+    }
+
+    @PublishedApi
     internal fun <T> returnAb(feature: Feature, valueA: T, valueB: T, predicate: FlipperPredicate): T {
         return if (predicate(configuration.getValue(feature))) valueA else valueB
+    }
+
+    @PublishedApi
+    internal fun <T> returnAb(feature: Feature, valueA: () -> T, valueB: () -> T, predicate: FlipperPredicate): T {
+        return if (predicate(configuration.getValue(feature))) valueA() else valueB()
     }
 
     @PublishedApi

@@ -19,6 +19,10 @@ inline fun <T> flipperPointAb(feature: Feature, valueA: T, valueB: T): T {
     return ToggleRouter.returnAb(feature, valueA, valueB)
 }
 
+inline fun <T> flipperPointAb(feature: Feature, noinline valueA: () -> T, noinline valueB: () -> T): T {
+    return ToggleRouter.returnAb(feature, valueA, valueB)
+}
+
 inline fun View.flipperPoint(feature: Feature) {
     ToggleRouter.flip(feature, this)
 }
