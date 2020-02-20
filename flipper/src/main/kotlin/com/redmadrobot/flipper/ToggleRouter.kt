@@ -5,6 +5,7 @@ import android.view.View
 import com.redmadrobot.flipper.config.FlipperConfig
 import com.redmadrobot.flipper.config.FlipperValue
 import com.redmadrobot.flipper.config.FlipperValue.BooleanValue
+import com.redmadrobot.flipper.ext.FlipperPredicate
 
 
 object ToggleRouter {

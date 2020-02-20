@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.redmadrobot.flipper.flipperPoint
+import com.redmadrobot.flipper.ext.flipperPoint
 import com.redmadrobot.sample.Features
 import com.redmadrobot.sample.R
 import kotlinx.android.synthetic.main.fragment_feature1.*
