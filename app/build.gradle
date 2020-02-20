@@ -38,6 +38,7 @@ android {
 
 dependencies {
     implementation project(':flipper')
+    implementation project(':flipper-firebase-config')
 
     implementation deps.kotlin.stdlib
 

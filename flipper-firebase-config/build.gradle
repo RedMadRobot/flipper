@@ -37,7 +37,9 @@ android {
 dependencies {
     implementation deps.kotlin.stdlib
 
+    implementation project(':flipper')
 
+    compileOnly deps.firebase.firebase_config
 
     testImplementation(
             deps.test.junit,

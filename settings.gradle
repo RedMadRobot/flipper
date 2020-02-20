@@ -1,1 +1,1 @@
-include ':app', ':flipper'
+include ':app', ':flipper', ':flipper-firebase-config'

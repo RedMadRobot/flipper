@@ -4,6 +4,9 @@ import android.view.MenuItem
 import android.view.View
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
+import com.redmadrobot.flipper.config.FlipperValue
+import com.redmadrobot.flipper.config.FlipperValue.LongValue
+import com.redmadrobot.flipper.config.FlipperValue.StringValue
 import com.redmadrobot.flipper.support.TestConfig
 import com.redmadrobot.flipper.support.TestFeature
 import org.assertj.core.api.Assertions.assertThat
@@ -48,6 +51,33 @@ class ToggleRouterTest {
     }
 
     @Test
+    fun `when feature value satisfies the condition - then view became visible`() {
+        // Given
+        val view = mock<View>()
+        testConfig.setValue(StringValue("Peek-a-Boo!"))
+
+        // When
+        ToggleRouter.flip(TestFeature, view) { v -> (v as StringValue).value == "Peek-a-Boo!" }
+
+        // Then
+        verify(view).visibility = View.VISIBLE
+    }
+
+    @Test
+    fun `when feature value doesn't satisfy the condition - then view became visible`() {
+        // Given
+        val view = mock<View>()
+        testConfig.setValue(StringValue("Peek-a-Boo!"))
+
+        // When
+        ToggleRouter.flip(TestFeature, view) { v -> (v as StringValue).value == "stub" }
+
+        // Then
+        verify(view).visibility = View.GONE
+    }
+
+
+    @Test
     fun `when feature is enabled - then A-view became visible and B-view became gone`() {
         // Given
         val viewA = mock<View>()
@@ -77,6 +107,36 @@ class ToggleRouterTest {
         verify(viewB).visibility = View.VISIBLE
     }
 
+    @Test()
+    fun `when feature value satisfies the condition - then A-view became visible and B-view became gone`() {
+        // Given
+        val viewA = mock<View>()
+        val viewB = mock<View>()
+
+        // When
+        testConfig.setValue(StringValue("Peek-a-Boo!"))
+        ToggleRouter.flipAb(TestFeature, viewA, viewB) { v -> (v as StringValue).value == "Peek-a-Boo!" }
+
+        // Then
+        verify(viewA).visibility = View.VISIBLE
+        verify(viewB).visibility = View.GONE
+    }
+
+    @Test()
+    fun `when feature value doesn't satisfy the condition - then A-view gone visible and B-view became visible`() {
+        // Given
+        val viewA = mock<View>()
+        val viewB = mock<View>()
+
+        // When
+        testConfig.setValue(StringValue("Peek-a-Boo!"))
+        ToggleRouter.flipAb(TestFeature, viewA, viewB) { v -> (v as StringValue).value == "stub" }
+
+        // Then
+        verify(viewA).visibility = View.GONE
+        verify(viewB).visibility = View.VISIBLE
+    }
+
     @Test
     fun `when feature is enabled - then menu item became visible`() {
         // Given
@@ -98,6 +158,32 @@ class ToggleRouterTest {
 
         // When
         ToggleRouter.flip(TestFeature, menuItem)
+
+        // Then
+        verify(menuItem).isVisible = false
+    }
+
+    @Test()
+    fun `when feature value satisfies the condition - then menu item became visible`() {
+        // Given
+        val menuItem = mock<MenuItem>()
+        testConfig.setValue(StringValue("Peek-a-Boo!"))
+
+        // When
+        ToggleRouter.flip(TestFeature, menuItem) { v -> (v as StringValue).value == "Peek-a-Boo!" }
+
+        // Then
+        verify(menuItem).isVisible = true
+    }
+
+    @Test()
+    fun `when feature value doesn't satisfy the condition - then menu item became invisible`() {
+        // Given
+        val menuItem = mock<MenuItem>()
+        testConfig.setValue(StringValue("Peek-a-Boo!"))
+
+        // When
+        ToggleRouter.flip(TestFeature, menuItem) { v -> (v as StringValue).value == "stub" }
 
         // Then
         verify(menuItem).isVisible = false
@@ -133,6 +219,36 @@ class ToggleRouterTest {
         verify(menuItemB).isVisible = true
     }
 
+    @Test()
+    fun `when feature value satisfies the condition - then A-menu item became visible and B-menu item became invisible`() {
+        // Given
+        val menuItemA = mock<MenuItem>()
+        val menuItemB = mock<MenuItem>()
+
+        // When
+        testConfig.setValue(StringValue("Peek-a-Boo!"))
+        ToggleRouter.flipAb(TestFeature, menuItemA, menuItemB) { v -> (v as StringValue).value == "Peek-a-Boo!" }
+
+        // Then
+        verify(menuItemA).isVisible = true
+        verify(menuItemB).isVisible = false
+    }
+
+    @Test()
+    fun `when feature value doesn't satisfy the condition - then A-menu item became invisible and B-menu item became visible`() {
+        // Given
+        val menuItemA = mock<MenuItem>()
+        val menuItemB = mock<MenuItem>()
+
+        // When
+        testConfig.setValue(StringValue("Peek-a-Boo!"))
+        ToggleRouter.flipAb(TestFeature, menuItemA, menuItemB) { v -> (v as StringValue).value == "stub" }
+
+        // Then
+        verify(menuItemA).isVisible = false
+        verify(menuItemB).isVisible = true
+    }
+
     @Test
     fun `when feature is enabled - then execute code block`() {
         // Given
@@ -155,6 +271,33 @@ class ToggleRouterTest {
 
         // When
         ToggleRouter.flip(TestFeature, block)
+
+        // Then
+        assertThat(workaround).isFalse()
+    }
+
+    @Test()
+    fun `when feature value satisfies the condition - then execute code block`() {
+        // Given
+        val block = mock<() -> Unit>()
+        testConfig.setValue(StringValue("Peek-a-Boo!"))
+
+        // When
+        ToggleRouter.flip(TestFeature, block) { v -> (v as StringValue).value == "Peek-a-Boo!" }
+
+        // Then
+        verify(block).invoke()
+    }
+
+    @Test()
+    fun `when feature value doesn't satisfy the condition - then don't execute code block`() {
+        // Given
+        var workaround = false
+        val block = { workaround = true }
+        testConfig.setValue(StringValue("Peek-a-Boo!"))
+
+        // When
+        ToggleRouter.flip(TestFeature, block) { v -> (v as StringValue).value == "stub" }
 
         // Then
         assertThat(workaround).isFalse()
@@ -198,6 +341,44 @@ class ToggleRouterTest {
         assertThat(workaroundB).isTrue()
     }
 
+    @Test()
+    fun `when feature value satisfies the condition - then execute A-code block and don't execute B-code block`() {
+        // Given
+        var workaroundA = false
+        var workaroundB = false
+
+        val blockA = { workaroundA = true }
+        val blockB = { workaroundB = true }
+
+        testConfig.setValue(StringValue("Peek-a-Boo!"))
+
+        // When
+        ToggleRouter.flipAb(TestFeature, blockA, blockB) { v -> (v as StringValue).value == "Peek-a-Boo!" }
+
+        // Then
+        assertThat(workaroundA).isTrue()
+        assertThat(workaroundB).isFalse()
+    }
+
+    @Test()
+    fun `when feature value doesn't satisfy the condition - then don't execute A-code block and execute B-code block`() {
+        // Given
+        var workaroundA = false
+        var workaroundB = false
+
+        val blockA = { workaroundA = true }
+        val blockB = { workaroundB = true }
+
+        testConfig.setValue(StringValue("Peek-a-Boo!"))
+
+        // When
+        ToggleRouter.flipAb(TestFeature, blockA, blockB) { v -> (v as StringValue).value == "stub" }
+
+        // Then
+        assertThat(workaroundA).isFalse()
+        assertThat(workaroundB).isTrue()
+    }
+
     @Test
     fun `when feature is enabled - then return A-value`() {
         // Given
@@ -224,22 +405,38 @@ class ToggleRouterTest {
         assertEquals(precalculatedValueB, result)
     }
 
-    @Test
-    fun `when feature is disabled - then return false`() {
-        // When
-        testConfig.enableFeature(false)
-        val result = ToggleRouter.featureIsEnabled(TestFeature)
+    @Test()
+    fun `when feature value satisfies the condition - then return A-value`() {
+        // Given
+        val precalculatedValueA = "valueA"
+        val precalculatedValueB = "valueB"
 
-        assertThat(result).isFalse()
+        // When
+        testConfig.setValue(StringValue("Peek-a-Boo!"))
+        val result = ToggleRouter.returnAb(
+            TestFeature,
+            precalculatedValueA,
+            precalculatedValueB
+        ) { v -> (v as StringValue).value == "Peek-a-Boo!" }
+
+        assertEquals(precalculatedValueA, result)
     }
 
-    @Test
-    fun `when feature is enabled - then return true`() {
-        // When
-        testConfig.enableFeature(true)
-        val result = ToggleRouter.featureIsEnabled(TestFeature)
+    @Test()
+    fun `when feature value doesn't satisfy the condition - then return B-value`() {
+        // Given
+        val precalculatedValueA = "valueA"
+        val precalculatedValueB = "valueB"
 
-        assertThat(result).isTrue()
+        // When
+        testConfig.setValue(StringValue("Peek-a-Boo!"))
+        val result = ToggleRouter.returnAb(
+            TestFeature,
+            precalculatedValueA,
+            precalculatedValueB
+        ) { v -> (v as StringValue).value == "stub" }
+
+        assertEquals(precalculatedValueB, result)
     }
 
     @Test
@@ -255,7 +452,7 @@ class ToggleRouterTest {
     }
 
     @Test
-    fun `when use returnAb - and both values are non-nullable - should return non-nullable result`() {
+    fun `when use returnAb with boolean as feature value - and both values are non-nullable - should return non-nullable result`() {
         // Given
         val precalculatedValueA = "valueA"
         val precalculatedValueB = "valueB"
@@ -264,6 +461,57 @@ class ToggleRouterTest {
         val result = ToggleRouter.returnAb(TestFeature, precalculatedValueA, precalculatedValueB)
 
         assertNotNullable(result)
+    }
+
+    @Test
+    fun `when use returnAb with not boolean as feature value - and both values are non-nullable - should return non-nullable result`() {
+        // Given
+        val precalculatedValueA = "valueA"
+        val precalculatedValueB = "valueB"
+
+        // When
+        testConfig.setValue(StringValue("foo"))
+        val result = ToggleRouter.returnAb(
+            TestFeature,
+            precalculatedValueA,
+            precalculatedValueB,
+            { x -> (x as StringValue).value == "bzz" }
+        )
+
+        assertNotNullable(result)
+    }
+
+    @Test
+    fun `when use returnAb with not boolean as feature value - and one of values is nullable - should return nullable result`() {
+        // Given
+        val precalculatedValueA = "valueA"
+        val precalculatedValueB = null
+
+        // When
+        testConfig.setValue(LongValue(1L))
+        val result = ToggleRouter.returnAb(
+            TestFeature,
+            precalculatedValueA,
+            precalculatedValueB,
+            { x -> (x as LongValue).value == 1L }
+        )
+
+        assertNullable(result)
+    }
+
+    @Test
+    fun `when feature can have several state - should return value by mapping`() {
+        // Given
+        val mapping = mapOf<FlipperValue, String>(
+            StringValue("foo") to "bar",
+            StringValue("bar") to "baz"
+        )
+
+        // When
+        testConfig.setValue(StringValue("foo"))
+        val result = ToggleRouter.select(TestFeature, mapping)
+
+        assertEquals("bar", result)
     }
 
     @Suppress("UNUSED_PARAMETER") // Parameter needed for type inference
