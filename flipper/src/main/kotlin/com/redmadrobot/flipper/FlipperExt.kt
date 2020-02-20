@@ -2,33 +2,43 @@ package com.redmadrobot.flipper
 
 import android.view.MenuItem
 import android.view.View
+import com.redmadrobot.flipper.config.FlipperConfigBuilder
+import com.redmadrobot.flipper.config.FlipperValue
 
-fun flipperPoint(feature: Feature, action: () -> Unit) {
+typealias FlipperPredicate = (FlipperValue) -> Boolean
+
+inline fun flipperPoint(feature: Feature, noinline action: () -> Unit) {
     ToggleRouter.flip(feature, action)
 }
 
-fun flipperPointAb(feature: Feature, actionA: () -> Unit, actionB: () -> Unit) {
+inline fun flipperPointAb(feature: Feature, noinline actionA: () -> Unit, noinline actionB: () -> Unit) {
     ToggleRouter.flipAb(feature, actionA, actionB)
 }
 
-fun <T> flipperPointAb(feature: Feature, valueA: T, valueB: T): T {
+inline fun <T> flipperPointAb(feature: Feature, valueA: T, valueB: T): T {
     return ToggleRouter.returnAb(feature, valueA, valueB)
 }
 
-fun View.flipperPoint(feature: Feature) {
+inline fun View.flipperPoint(feature: Feature) {
     ToggleRouter.flip(feature, this)
 }
 
-fun View.flipperPointAb(feature: Feature, alternativeView: View) {
+inline fun View.flipperPointAb(feature: Feature, alternativeView: View) {
     ToggleRouter.flipAb(feature, this, alternativeView)
 }
 
-fun MenuItem.flipperPoint(feature: Feature) {
+inline fun MenuItem.flipperPoint(feature: Feature) {
     ToggleRouter.flip(feature, this)
 }
 
-fun MenuItem.flipperPointAb(feature: Feature, alternativeMenuItem: MenuItem) {
+inline fun MenuItem.flipperPointAb(feature: Feature, alternativeMenuItem: MenuItem) {
     ToggleRouter.flipAb(feature, this, alternativeMenuItem)
 }
 
-fun flipperPointIsEnabled(feature: Feature): Boolean = ToggleRouter.featureIsEnabled(feature)
+inline fun <T : Any> flipperPointSelect(feature: Feature, mapping: Map<FlipperValue, T>): T {
+    return ToggleRouter.select(feature, mapping)
+}
+
+inline fun buildFeaturesMap(builderAction: FlipperConfigBuilder.() -> Unit): MutableMap<String, FlipperValue> {
+    return FlipperConfigBuilder().apply(builderAction).build()
+}

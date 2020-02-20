@@ -4,5 +4,5 @@ import com.redmadrobot.flipper.Feature
 
 
 interface FlipperConfig {
-    fun featureIsEnabled(feature: Feature): Boolean
+    fun getValue(feature: Feature): FlipperValue
 }

@@ -42,6 +42,16 @@ kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 deps.kotlin = kotlin
 //endregion
 
+//regin Third party
+def firebase = [:]
+
+versions.firebase_config = "19.1.1"
+
+firebase.firebase_config = "com.google.firebase:firebase-config:$versions.firebase_config"
+
+deps.firebase = firebase
+//endregion
+
 //region Testing
 def test = [:]
 
