@@ -3,7 +3,7 @@ package com.redmadrobot.flipper.config
 import com.redmadrobot.flipper.config.FlipperValue.*
 
 
-class FlipperConfigBuilder{
+class FlipperConfigBuilder {
     private val features = mutableMapOf<String, FlipperValue>()
 
     fun appendBoolean(pair: Pair<String, Boolean>): FlipperConfigBuilder {

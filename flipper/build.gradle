@@ -37,8 +37,6 @@ android {
 dependencies {
     implementation deps.kotlin.stdlib
 
-
-
     testImplementation(
             deps.test.junit,
             deps.test.assertj,
