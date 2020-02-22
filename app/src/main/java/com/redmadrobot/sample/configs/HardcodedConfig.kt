@@ -10,10 +10,11 @@ import com.redmadrobot.sample.Features
 
 class HardcodedConfig : FlipperConfig {
     private val features = buildFeaturesMap {
-        Features.Feature1 to true
-        Features.Feature2 to false
-        Features.Feature3 to true
-        Features.Feature4 to false
+        Features.Feature1 bind  true
+        Features.Feature2 bind  false
+        Features.Feature3 bind  true
+        Features.Feature4 bind  false
+        Features.Feature1 bind  1
     }
 
     override fun getValue(feature: Feature): FlipperValue {

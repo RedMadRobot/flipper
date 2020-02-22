@@ -7,23 +7,23 @@ import com.redmadrobot.flipper.config.FlipperValue.*
 class FlipperConfigBuilder {
     private val features = mutableMapOf<String, FlipperValue>()
 
-    infix fun Feature.to(value: Boolean) {
+    infix fun Feature.bind(value: Boolean) {
         features[this.id] = BooleanValue(value)
     }
 
-    infix fun Feature.to(value: String) {
+    infix fun Feature.bind(value: String) {
         features[this.id] = StringValue(value)
     }
 
-    infix fun Feature.to(value: Double) {
+    infix fun Feature.bind(value: Double) {
         features[this.id] = DoubleValue(value)
     }
 
-    infix fun Feature.to(value: Long) {
+    infix fun Feature.bind(value: Long) {
         features[this.id] = LongValue(value)
     }
 
-    infix fun Feature.to(value: ByteArray) {
+    infix fun Feature.bind(value: ByteArray) {
         features[this.id] = ByteArrayValue(value)
     }
 
