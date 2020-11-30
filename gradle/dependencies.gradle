@@ -46,7 +46,7 @@ deps.kotlin = kotlin
 //regin Third party
 def firebase = [:]
 
-versions.firebase_config = "19.1.1"
+versions.firebase_config = "20.0.1"
 
 firebase.firebase_config = "com.google.firebase:firebase-config:$versions.firebase_config"
 
@@ -57,8 +57,8 @@ deps.firebase = firebase
 def test = [:]
 
 versions.junit = "4.12"
-versions.assertj = "3.10.0"
-versions.mockito_kotlin = "2.0.0"
+versions.assertj = "3.18.1"
+versions.mockito_kotlin = "2.2.0"
 
 test.junit = "junit:junit:$versions.junit"
 test.mockito_kotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockito_kotlin"
