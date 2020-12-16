@@ -16,6 +16,7 @@ fun FirebaseRemoteConfigValue.toFlipperValue(): FlipperValue {
 }
 
 private inline fun <T> FirebaseRemoteConfigValue.guard(block: FirebaseRemoteConfigValue.() -> T): T? {
+    @Suppress("SwallowedException")
     return try {
         block()
     } catch (e: IllegalArgumentException) {
@@ -24,11 +25,11 @@ private inline fun <T> FirebaseRemoteConfigValue.guard(block: FirebaseRemoteConf
 }
 
 private inline fun extract(value: FirebaseRemoteConfigValue): Any? {
-    //@formatter:off
-    return value.guard { asBoolean() } ?:
-            value.guard { asDouble() } ?:
-            value.guard { asLong() } ?:
-            value.guard { asByteArray() } ?:
-            value.guard { asString() }
-    //@formatter:on
+    // @formatter:off
+    return value.guard { asBoolean() }
+        ?: value.guard { asDouble() }
+        ?: value.guard { asLong() }
+        ?: value.guard { asByteArray() }
+        ?: value.guard { asString() }
+    // @formatter:on
 }

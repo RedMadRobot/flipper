@@ -5,7 +5,6 @@ import android.view.View
 import com.redmadrobot.flipper.Feature
 import com.redmadrobot.flipper.ToggleRouter
 
-
 inline fun flipperPointAb(feature: Feature, noinline actionA: () -> Unit, noinline actionB: () -> Unit) {
     ToggleRouter.flipAb(feature, actionA, actionB)
 }
@@ -59,4 +58,3 @@ inline fun <T> flipperPointAb(
 ): T {
     return ToggleRouter.returnAb(feature, valueA, valueB, predicate)
 }
-

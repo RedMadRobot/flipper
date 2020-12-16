@@ -35,5 +35,3 @@ inline fun MenuItem.flipperPoint(feature: Feature, noinline predicate: FlipperPr
 inline fun <T : Any> flipperPointSelect(feature: Feature, mapping: Map<FlipperValue, T>): T {
     return ToggleRouter.select(feature, mapping)
 }
-
-
