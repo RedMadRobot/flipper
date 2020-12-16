@@ -59,6 +59,6 @@ bintray {
             vcsTag = publishProperties["lib_version"]
         }
 
-        dryRun = true
+        dryRun = false
     }
 }
