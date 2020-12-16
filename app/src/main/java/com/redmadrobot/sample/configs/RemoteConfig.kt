@@ -9,9 +9,8 @@ import com.redmadrobot.flipper.config.FlipperValue
 import com.redmadrobot.flipper.firebase_config.toFlipperValue
 import com.redmadrobot.sample.R
 
-
 class RemoteConfig : FlipperConfig {
-    private val remoteConfig by lazy { FirebaseRemoteConfig.getInstance() }
+    private val config by lazy { FirebaseRemoteConfig.getInstance() }
 
     private val configSettings by lazy {
         FirebaseRemoteConfigSettings.Builder()
@@ -20,7 +19,7 @@ class RemoteConfig : FlipperConfig {
     }
 
     init {
-        with(remoteConfig) {
+        with(config) {
             setConfigSettingsAsync(configSettings)
             setDefaultsAsync(R.xml.remote_config_defaults)
             fetchAndActivate().addOnCompleteListener {
@@ -32,6 +31,6 @@ class RemoteConfig : FlipperConfig {
     }
 
     override fun getValue(feature: Feature): FlipperValue {
-        return remoteConfig.getValue(feature.id).toFlipperValue()
+        return config.getValue(feature.id).toFlipperValue()
     }
 }

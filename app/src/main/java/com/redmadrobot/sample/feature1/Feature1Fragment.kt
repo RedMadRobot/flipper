@@ -1,6 +1,5 @@
 package com.redmadrobot.sample.feature1
 
-
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,11 +12,11 @@ import com.redmadrobot.sample.Features
 import com.redmadrobot.sample.R
 import kotlinx.android.synthetic.main.fragment_feature1.*
 
-
 class Feature1Fragment : Fragment() {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_feature1, container, false)

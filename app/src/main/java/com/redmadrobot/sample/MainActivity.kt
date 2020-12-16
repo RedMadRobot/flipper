@@ -3,7 +3,6 @@ package com.redmadrobot.sample
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.redmadrobot.flipper.ext.flipperPoint
@@ -52,9 +51,9 @@ class MainActivity : AppCompatActivity() {
             intent = intent
         )
 
-        controller.observe(this, Observer { navController ->
+        controller.observe(this) { navController ->
             setupActionBarWithNavController(navController)
-        })
+        }
 
         currentNavController = controller
     }
