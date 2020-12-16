@@ -3,7 +3,6 @@ package com.redmadrobot.flipper.config
 import com.redmadrobot.flipper.Feature
 import com.redmadrobot.flipper.config.FlipperValue.*
 
-
 class FlipperConfigBuilder {
     private val features = mutableMapOf<String, FlipperValue>()
 

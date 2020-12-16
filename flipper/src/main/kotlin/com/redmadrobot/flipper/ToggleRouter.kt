@@ -7,9 +7,8 @@ import com.redmadrobot.flipper.config.FlipperValue
 import com.redmadrobot.flipper.config.FlipperValue.BooleanValue
 import com.redmadrobot.flipper.ext.FlipperPredicate
 
-
 object ToggleRouter {
-    private const val BAD_FLIPPERPOINT_MESSAGE = "It's not a flipper point"
+    private const val BAD_FLIPPERPOINT_MESSAGE = "It's not a flipper point: %s"
 
     private lateinit var configuration: FlipperConfig
 
@@ -23,7 +22,7 @@ object ToggleRouter {
             is View -> flipView(feature, flipperPoint)
             is MenuItem -> flipMenuItem(feature, flipperPoint)
             is Function0<*> -> flipFunction(feature, flipperPoint)
-            else -> throw IllegalArgumentException("$BAD_FLIPPERPOINT_MESSAGE: $flipperPoint")
+            else -> throw IllegalArgumentException(BAD_FLIPPERPOINT_MESSAGE.format(flipperPoint))
         }
     }
 
@@ -33,7 +32,7 @@ object ToggleRouter {
             is View -> flipView(feature, flipperPoint, predicate)
             is MenuItem -> flipMenuItem(feature, flipperPoint, predicate)
             is Function0<*> -> flipFunction(feature, flipperPoint, predicate)
-            else -> throw IllegalArgumentException("$BAD_FLIPPERPOINT_MESSAGE: $flipperPoint")
+            else -> throw IllegalArgumentException(BAD_FLIPPERPOINT_MESSAGE.format(flipperPoint))
         }
     }
 
@@ -43,7 +42,7 @@ object ToggleRouter {
             is View -> flipViewAb(feature, flipperPoint, alternative as View)
             is MenuItem -> flipMenuItemAb(feature, flipperPoint, alternative as MenuItem)
             is Function0<*> -> flipFunctionAb(feature, flipperPoint, alternative as Function0<*>)
-            else -> throw IllegalArgumentException("$BAD_FLIPPERPOINT_MESSAGE: $flipperPoint")
+            else -> throw IllegalArgumentException(BAD_FLIPPERPOINT_MESSAGE.format(flipperPoint))
         }
     }
 
@@ -53,7 +52,7 @@ object ToggleRouter {
             is View -> flipViewAb(feature, flipperPoint, alternative as View, predicate)
             is MenuItem -> flipMenuItemAb(feature, flipperPoint, alternative as MenuItem, predicate)
             is Function0<*> -> flipFunctionAb(feature, flipperPoint, alternative as Function0<*>, predicate)
-            else -> throw IllegalArgumentException("$BAD_FLIPPERPOINT_MESSAGE: $flipperPoint")
+            else -> throw IllegalArgumentException(BAD_FLIPPERPOINT_MESSAGE.format(flipperPoint))
         }
     }
 
@@ -180,7 +179,6 @@ object ToggleRouter {
             alternativeFunction()
         }
     }
-
 
     private fun extractBooleanValue(feature: Feature): Boolean {
         val featureValue = configuration.getValue(feature)

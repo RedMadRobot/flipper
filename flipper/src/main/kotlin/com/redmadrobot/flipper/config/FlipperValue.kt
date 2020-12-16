@@ -1,6 +1,5 @@
 package com.redmadrobot.flipper.config
 
-
 sealed class FlipperValue {
     object EmptyValue : FlipperValue()
 
@@ -26,4 +25,3 @@ sealed class FlipperValue {
         }
     }
 }
-
