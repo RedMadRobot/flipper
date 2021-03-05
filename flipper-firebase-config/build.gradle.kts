@@ -1,9 +1,8 @@
 plugins {
     id(Android.libraryPlugin)
     kotlin(Kotlin.androidPlugin)
+    id("publishPlugin")
 }
-
-apply(from = "../gradle/publish.gradle")
 
 android {
     compileSdkVersion(Android.compileSdk)
