@@ -6,7 +6,7 @@ group = "com.redmadrobot.build"
 
 repositories {
     google()
-    jcenter()
+    mavenCentral()
 }
 
 gradlePlugin {
@@ -19,5 +19,5 @@ gradlePlugin {
 }
 
 dependencies {
-    implementation("com.android.tools.build:gradle:4.1.2")
+    implementation("com.android.tools.build:gradle:4.1.3")
 }
